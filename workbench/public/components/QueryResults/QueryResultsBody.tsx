@@ -581,6 +581,7 @@ class QueryResultsBody extends React.Component<QueryResultsBodyProps, QueryResul
 
       for (let i = 0; i < rowItems.length; i++) {
         let rowItem = rowItems[i];
+        console.log('in renderRow, rowItem is', rowItem);
         let tableCells: Array<any> = [];
         const tree = getRowTree(rowId, rowItem, expandedRowMap);
 
@@ -596,6 +597,7 @@ class QueryResultsBody extends React.Component<QueryResultsBodyProps, QueryResul
             // Table cell
             if (field.id !== "expandIcon") {
               const fieldObj = this.getFieldValue(rowItem[field], field);
+              console.log('fieldObj is', fieldObj);
               let fieldValue: any;
 
               // If field is expandable
@@ -623,6 +625,8 @@ class QueryResultsBody extends React.Component<QueryResultsBodyProps, QueryResul
               } else {
                 fieldValue = fieldObj.value;
               }
+              console.log('field is', field);
+              console.log('fieldValue is', fieldValue);
               tableCells.push(
                 <EuiTableRowCell
                   key={field}
@@ -651,11 +655,13 @@ class QueryResultsBody extends React.Component<QueryResultsBodyProps, QueryResul
             </EuiTableRowCell>
           );
         }
+        console.log('tableCells is', tableCells);
 
         const tableRow = <EuiTableRow key={rowId} data-test-subj={'tableRow'}>{tableCells} </EuiTableRow>;
         let row = <Fragment>{tableRow}</Fragment>;
-
+        console.log('row is', row);
         if (expandedRowMap[rowId] && expandedRowMap[rowId].expandedRow) {
+          console.log('enters if block');
           const tableRow = (
             <EuiTableRow className="expanded-row" key={rowId}>
               {tableCells}{" "}
@@ -678,6 +684,9 @@ class QueryResultsBody extends React.Component<QueryResultsBodyProps, QueryResul
   }
 
   renderRows(items: any, columns: string[], expandedRowMap: ItemIdToExpandedRowMap) {
+    console.log('in renderRows, items is', items);
+    console.log('columns is', columns);
+
     let rows: any[] = [];
     if (items) {
       for (
@@ -686,6 +695,7 @@ class QueryResultsBody extends React.Component<QueryResultsBodyProps, QueryResul
         itemIndex++
       ) {
         const item = items[itemIndex];
+        console.log('in renderRows loop, item is', item);
         if (item) {
           const rowId = item["id"].toString();
           const rowsForItem = this.renderRow(
@@ -694,6 +704,8 @@ class QueryResultsBody extends React.Component<QueryResultsBodyProps, QueryResul
             rowId,
             expandedRowMap
           );
+
+          console.log('rowsForItem is', rowsForItem);
           rows.push(rowsForItem);
         }
       }
