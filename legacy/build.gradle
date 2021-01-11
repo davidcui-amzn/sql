@@ -4,7 +4,7 @@ plugins {
     id 'antlr'
 }
 
-version '1.8.0.0'
+version '1.12.0.0'
 
 repositories {
     mavenCentral()
@@ -21,6 +21,7 @@ configurations {
     compile {
         extendsFrom = extendsFrom.findAll { it != configurations.antlr }
     }
+    runtime.exclude group: "elasticsearch-x-content", module: "org.elasticsearch"
 }
 
 // TODO: fix compiler warnings
@@ -74,7 +75,11 @@ dependencies {
     implementation group: 'com.google.guava', name: 'guava', version: '29.0-jre'
     compile group: 'org.json', name: 'json', version:'20180813'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
-    compile group: 'org.elasticsearch', name: 'elasticsearch', version: "${es_version}"
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.5'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.5.1'
+    // compile group: 'org.elasticsearch', name: 'elasticsearch', version: "${es_version}"
+    compileOnly group: 'org.elasticsearch.client', name: 'elasticsearch-rest-high-level-client', version: "${es_version}"
+
     compile project(':sql')
     compile project(':common')
     compile project(':elasticsearch')

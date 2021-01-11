@@ -11,8 +11,8 @@ repositories {
 dependencies {
     // https://github.com/google/guava/wiki/CVE-2018-10237
     compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.4'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.4'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.5' 
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.5.1'
     implementation 'com.google.code.gson:gson:2.8.6'
     compile project(':core')
     compile project(':elasticsearch')
@@ -21,6 +21,10 @@ dependencies {
     testCompile group: 'org.hamcrest', name: 'hamcrest-library', version: '2.1'
     testCompile group: 'org.mockito', name: 'mockito-core', version: '3.3.3'
     testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.3.3'
+}
+
+configurations {
+  runtime.exclude group: "elasticsearch-x-content", module: "org.elasticsearch"
 }
 
 test {
