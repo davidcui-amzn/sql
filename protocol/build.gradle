@@ -23,10 +23,6 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.3.3'
 }
 
-configurations {
-  runtime.exclude group: "elasticsearch-x-content", module: "org.elasticsearch"
-}
-
 test {
     useJUnitPlatform()
     testLogging {
